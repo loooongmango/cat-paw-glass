@@ -2,15 +2,19 @@
 
 一个从「玻璃桌底下往上看」的个人主页概念稿：玻璃是一块触控感应屏，猫爪按上来，只有真正贴住玻璃的地方才会发出冷光。
 
-![预览](assets/night.jpg)
+![整页效果：几只猫爪轮流按在玻璃上发光](docs/demo.gif)
 
 ## 效果
+
+<img src="docs/kneading.gif" alt="特写：两只前爪交替踩奶，肉垫按下时发亮，抬起后留下余辉" width="480" align="right">
 
 - **按压过程**：脚趾尖先碰到玻璃，亮起几个暗淡的小光点；压实后肉垫摊开、脚趾张开，中心亮到发白，光晕渗进磨砂玻璃；抬起时后掌先灭、脚趾最后离开，原地留一圈慢慢衰减的余辉。
 - **景深**：只有贴着玻璃的肉垫是清楚的，腿和身体离玻璃越远越模糊。
 - **踩奶**：右上角两只前爪交替收放，光一明一暗地跳。
 - **标注**：每次接触会弹出对焦框、接触编号和一根压力条。
 - **声音**：点右下角 `SOUND` 开启。背景音乐用 Web Audio 在页面里实时合成（氛围长音、超低音、雨声），每只爪子落下会响一声玻璃音，左右声道跟着爪子的位置走。不用任何音频文件。
+
+<br clear="right">
 
 ## 运行
 
@@ -36,7 +40,11 @@ python3 -m http.server 8000
 | --- | --- |
 | `index.html` | 整个页面：样式、动画、爪印生成和声音合成都在这一个文件里 |
 | `assets/night.jpg` | 卡片上的照片（用代码画的，不是真实照片） |
-| `tools/night.py` | 生成上面那张图的脚本，需要 `numpy` 和 `Pillow`：`python3 tools/night.py` |
+| `docs/demo.gif`、`docs/kneading.gif` | README 里的动图 |
+| `tools/night.py` | 生成卡片照片的脚本，需要 `numpy` 和 `Pillow`：`python3 tools/night.py` |
+| `tools/make_gifs.sh`、`tools/capture.js` | 重新录制 README 动图：暂停页面动画逐帧截图，再首尾交叉淡化成无缝循环。需要 Node + Playwright、Pillow 和 ffmpeg：`tools/make_gifs.sh` |
+
+动图是在连不上 Google Fonts 的环境里录的，所以名字和等宽小字用了本地替代字体；实际页面会加载 Anton 和 IBM Plex Mono，字形会略有不同。
 
 ## 说明
 
