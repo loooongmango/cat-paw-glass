@@ -1,53 +1,53 @@
 # cat-paw-glass
 
-一个从「玻璃桌底下往上看」的个人主页概念稿：玻璃是一块触控感应屏，猫爪按上来，只有真正贴住玻璃的地方才会发出冷光。
+A concept for a personal profile page, seen from under a glass table. The glass is a touch-sensing surface: when a cat presses its paw on it, only the spots in real contact light up.
 
-![整页效果：几只猫爪轮流按在玻璃上发光](docs/demo.gif)
+![Full page: several cat paws take turns pressing on the glass and lighting up](docs/demo.gif)
 
-## 效果
+## What it does
 
-<img src="docs/kneading.gif" alt="特写：两只前爪交替踩奶，肉垫按下时发亮，抬起后留下余辉" width="480" align="right">
+<img src="docs/kneading.gif" alt="Close-up: two front paws knead in turn, the pads glow as they press and leave an afterglow when lifted" width="480" align="right">
 
-- **按压过程**：脚趾尖先碰到玻璃，亮起几个暗淡的小光点；压实后肉垫摊开、脚趾张开，中心亮到发白，光晕渗进磨砂玻璃；抬起时后掌先灭、脚趾最后离开，原地留一圈慢慢衰减的余辉。
-- **景深**：只有贴着玻璃的肉垫是清楚的，腿和身体离玻璃越远越模糊。
-- **踩奶**：右上角两只前爪交替收放，光一明一暗地跳。
-- **标注**：每次接触会弹出对焦框、接触编号和一根压力条。
-- **声音**：点右下角 `SOUND` 开启。背景音乐用 Web Audio 在页面里实时合成（氛围长音、超低音、雨声），每只爪子落下会响一声玻璃音，左右声道跟着爪子的位置走。不用任何音频文件。
+- **The press**: the toe tips touch first and show as a few dim points of light. As the paw settles, the pads spread, the toes splay, the centres burn white and the glow bleeds into the frosted glass. On lift-off the main pad goes dark first and the toes leave last, leaving a slowly fading afterglow.
+- **Depth of field**: only the pads touching the glass are sharp. The leg and body get blurrier the farther they are from the glass.
+- **Kneading**: two front paws in the top right push in turn, and their glow pulses with each push.
+- **Readouts**: every contact brings up a focus bracket, a contact label and a pressure bar.
+- **Sound**: press `SOUND` in the bottom right. The music is synthesized live in the page with Web Audio (an ambient pad, sub bass and rain). Each paw that lands rings a glass tone, panned to where it lands on screen. No audio files are used.
 
 <br clear="right">
 
-## 运行
+## Run it
 
-纯静态页面，没有构建步骤。直接用浏览器打开 `index.html`，或者起一个本地服务：
+It's a plain static page with no build step. Open `index.html` in a browser, or serve the folder locally:
 
 ```bash
 python3 -m http.server 8000
-# 打开 http://localhost:8000
+# then open http://localhost:8000
 ```
 
-### 部署到 GitHub Pages
+### Deploy to GitHub Pages
 
-仓库 Settings → Pages → Source 选 `Deploy from a branch`，分支选 `main`、目录选 `/ (root)`，保存后等一两分钟即可访问。
+In the repo, go to Settings → Pages, set Source to `Deploy from a branch`, choose `main` and `/ (root)`, and save. The page is live a minute or two later.
 
-### 可选参数
+### URL options
 
-- `?accent=c8ff3d` 换冷光颜色（6 位十六进制，不带 `#`），比如酸性绿 `c8ff3d`、信号红 `ff453a`
-- `?hud=0` 关掉对焦框和标注
+- `?accent=c8ff3d` changes the glow colour (6-digit hex, no `#`), e.g. acid green `c8ff3d` or signal red `ff453a`
+- `?hud=0` hides the focus brackets and readouts
 
-## 文件
+## Files
 
-| 路径 | 说明 |
+| Path | What it is |
 | --- | --- |
-| `index.html` | 整个页面：样式、动画、爪印生成和声音合成都在这一个文件里 |
-| `assets/night.jpg` | 卡片上的照片（用代码画的，不是真实照片） |
-| `docs/demo.gif`、`docs/kneading.gif` | README 里的动图 |
-| `tools/night.py` | 生成卡片照片的脚本，需要 `numpy` 和 `Pillow`：`python3 tools/night.py` |
-| `tools/make_gifs.sh`、`tools/capture.js` | 重新录制 README 动图：暂停页面动画逐帧截图，再首尾交叉淡化成无缝循环。需要 Node + Playwright、Pillow 和 ffmpeg：`tools/make_gifs.sh` |
+| `index.html` | The whole page: styles, animation, paw generation and sound synthesis all live in this one file |
+| `assets/night.jpg` | The photo on the card (drawn in code, not a real photo) |
+| `docs/demo.gif`, `docs/kneading.gif` | The GIFs in this README |
+| `tools/night.py` | Renders the card photo. Needs `numpy` and `Pillow`: `python3 tools/night.py` |
+| `tools/make_gifs.sh`, `tools/capture.js` | Re-record the README GIFs: pause the page's animations, screenshot frame by frame, then crossfade the end into the start for a seamless loop. Needs Node + Playwright, Pillow and ffmpeg: `tools/make_gifs.sh` |
 
-动图是在连不上 Google Fonts 的环境里录的，所以名字和等宽小字用了本地替代字体；实际页面会加载 Anton 和 IBM Plex Mono，字形会略有不同。
+The GIFs were recorded on a machine that couldn't reach Google Fonts, so the name and the monospaced labels use local stand-in fonts. The live page loads Anton and IBM Plex Mono, so the lettering looks slightly different there.
 
-## 说明
+## Notes
 
-- 页面上的人物「林一禾 / YIHE LIN」、简介和照片都是虚构的，仅作概念展示。
-- 视角创意参考了小红书博主「三眼鱼石 DESIGN」分享的一个个人网站。
-- 页面会尊重系统的「减少动态效果」设置，开启后动画会停下来。
+- The person on the page ("Yihe Lin"), the bio and the photo are fictional. This is a concept piece.
+- The view-from-under-the-glass idea came from a personal website shared by 三眼鱼石 DESIGN on Xiaohongshu.
+- The page respects the system's "reduce motion" setting: with it on, the animations stop.
